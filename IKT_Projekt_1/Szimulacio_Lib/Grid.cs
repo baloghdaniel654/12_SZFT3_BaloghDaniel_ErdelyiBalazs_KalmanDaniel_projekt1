@@ -40,7 +40,40 @@
                 }
             }
         }
+        public void PrintGrid()
+        {
+            for (int i = 0; i < GridSize; i++)
+            {
+                for (int j = 0; j < GridSize; j++)
+                {
+                    Console.ForegroundColor = Grass[i, j] switch
+                    {
+                        0 => ConsoleColor.DarkGray,
+                        1 => ConsoleColor.Yellow,
+                        _ => ConsoleColor.Green
+                    };
+                    Console.Write(".");
 
+                    if (Rabbits[i, j] > 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("R");
+                    }
+
+                    else if (Foxes[i, j] > 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("F");
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.ResetColor();
+        }
 
     }
 }
