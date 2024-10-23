@@ -16,6 +16,19 @@
             random = new Random();
         }
 
+        public void InitializeGrass()
+        {
+            for (int i = 0; i < GridSize; i++)
+            {
+                for (int j = 0; j < GridSize; j++)
+                {
+                    Grass[i, j] = random.Next(3);
+                }
+            }
+        }
+
+
+
 
     }
 }
