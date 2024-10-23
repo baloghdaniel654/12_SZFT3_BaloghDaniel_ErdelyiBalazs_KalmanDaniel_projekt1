@@ -78,6 +78,46 @@
             }
         }
 
+        public void Reproduce()
+        {
+            for (int i = 0; i < Grid.GridSize; i++)
+            {
+                for (int j = 0; j < Grid.GridSize; j++)
+                {
+                    if (grid.Foxes[i, j] > 0)
+                    {
+                        for (int dx = -1; dx <= 1; dx++)
+                        {
+                            for (int dy = -1; dy <= 1; dy++)
+                            {
+                                if (Math.Abs(dx) + Math.Abs(dy) != 1) continue;
+                                int nx = (i + dx + Grid.GridSize) % Grid.GridSize;
+                                int ny = (j + dy + Grid.GridSize) % Grid.GridSize;
+
+                                if (grid.Foxes[nx, ny] > 0)
+                                {
+                                    for (int dx2 = -1; dx2 <= 1; dx2++)
+                                    {
+                                        for (int dy2 = -1; dy2 <= 1; dy2++)
+                                        {
+                                            if (Math.Abs(dx2) + Math.Abs(dy2) != 1) continue;
+                                            int nnx = (i + dx2 + Grid.GridSize) % Grid.GridSize;
+                                            int nny = (j + dy2 + Grid.GridSize) % Grid.GridSize;
+
+                                            if (grid.Foxes[nnx, nny] == 0 && grid.Rabbits[nnx, nny] == 0)
+                                            {
+                                                grid.Foxes[nnx, nny] = 1;
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
     }
 }
