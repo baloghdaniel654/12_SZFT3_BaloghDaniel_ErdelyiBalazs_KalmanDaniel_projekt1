@@ -119,5 +119,14 @@
             }
         }
 
+        private void ShuffleArray(int[] array)
+        {
+            Random rand = new Random();
+            for (int i = array.Length - 1; i > 0; i--)
+            {
+                int j = rand.Next(i + 1);
+                (array[i], array[j]) = (array[j], array[i]);
+            }
+        }
     }
 }
