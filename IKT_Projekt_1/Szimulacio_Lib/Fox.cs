@@ -55,6 +55,28 @@
             return false;
         }
 
+        public void Move(int x, int y)
+        {
+            int[] directions = { -1, 0, 1 };
+            ShuffleArray(directions);
+
+            foreach (var dx in directions)
+            {
+                foreach (var dy in directions)
+                {
+                    if (dx == 0 && dy == 0) continue;
+                    int ni = (x + dx + Grid.GridSize) % Grid.GridSize;
+                    int nj = (y + dy + Grid.GridSize) % Grid.GridSize;
+
+                    if (grid.Rabbits[ni, nj] == 0 && grid.Foxes[ni, nj] == 0)
+                    {
+                        grid.Foxes[ni, nj] = grid.Foxes[x, y];
+                        grid.Foxes[x, y] = 0;
+                        return;
+                    }
+                }
+            }
+        }
 
 
     }
