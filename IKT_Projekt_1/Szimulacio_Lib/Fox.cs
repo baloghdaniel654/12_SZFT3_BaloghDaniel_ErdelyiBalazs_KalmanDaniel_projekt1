@@ -34,6 +34,26 @@
             Reproduce();
         }
 
+        public bool CheckForRabbits(int x, int y)
+        {
+            for (int di = -2; di <= 2; di++)
+            {
+                for (int dj = -2; dj <= 2; dj++)
+                {
+                    if (Math.Abs(di) + Math.Abs(dj) > 2) continue;
+                    int ni = (x + di + Grid.GridSize) % Grid.GridSize;
+                    int nj = (y + dj + Grid.GridSize) % Grid.GridSize;
+
+                    if (grid.Rabbits[ni, nj] > 0)
+                    {
+                        grid.Foxes[x, y] = Math.Min(grid.Foxes[x, y] + 3, maxFoxSatiety);
+                        grid.Rabbits[ni, nj] = 0;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
 
 
