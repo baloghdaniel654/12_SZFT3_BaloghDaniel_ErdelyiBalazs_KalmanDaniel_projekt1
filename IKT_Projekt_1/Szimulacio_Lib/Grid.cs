@@ -27,7 +27,19 @@
             }
         }
 
-
+        public void UpdateGrass()
+        {
+            for (int i = 0; i < GridSize; i++)
+            {
+                for (int j = 0; j < GridSize; j++)
+                {
+                    if (Grass[i, j] < 2)
+                    {
+                        Grass[i, j]++;
+                    }
+                }
+            }
+        }
 
 
     }
