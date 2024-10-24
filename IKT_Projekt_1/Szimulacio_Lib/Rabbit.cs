@@ -25,5 +25,23 @@ namespace Szimulacio_Lib
       }
       Reproduce();
   }
+          private void EatGrass(int x, int y)
+  {
+      if (grid.Grass[x, y] == 2)
+      {
+          grid.Rabbits[x, y] = Math.Min(grid.Rabbits[x, y] + 2, maxRabbitSatiety);
+          grid.Grass[x, y] = 0;
+      }
+      else if (grid.Grass[x, y] == 1)
+      {
+          grid.Rabbits[x, y] = Math.Min(grid.Rabbits[x, y] + 1, maxRabbitSatiety);
+          grid.Grass[x, y] = 0;
+      }
+      else
+      {
+          grid.Rabbits[x, y]--;
+      }
+  }
+        
     }
 }
