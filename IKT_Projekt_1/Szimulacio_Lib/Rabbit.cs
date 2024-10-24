@@ -10,32 +10,6 @@ namespace Szimulacio_Lib
             this.grid = grid;
         }
 
-          public void Update()
-  {
-      for (int i = 0; i < Grid.GridSize; i++)
-      {
-          for (int j = 0; j < Grid.GridSize; j++)
-          {
-              if (grid.Rabbits[i, j] > 0)
-              {
-                  EatGrass(i, j);
-                  Move(i, j);
-              }
-          }
-      }
-      Reproduce();
-  }namespace Szimulacio_Lib
-{
-    public class Rabbit
-    {
-        private const int maxRabbitSatiety = 5;
-        private Grid grid;
-
-        public Rabbit(Grid grid)
-        {
-            this.grid = grid;
-        }
-
         public void Place(int x, int y)
         {
             grid.Rabbits[x, y] = new Random().Next(maxRabbitSatiety) + 1;
@@ -93,6 +67,34 @@ namespace Szimulacio_Lib
                         grid.Rabbits[ni, nj] = grid.Rabbits[x, y];
                         grid.Rabbits[x, y] = 0;
                         return;
+                    }
+                }
+            }
+        }
+
+        public void Reproduce()
+        {
+            for (int i = 0; i < Grid.GridSize; i++)
+            {
+                for (int j = 0; j < Grid.GridSize; j++)
+                {
+                    if (grid.Rabbits[i, j] > 0)
+                    {
+                        for (int dx = -1; dx <= 1; dx++)
+                        {
+                            for (int dy = -1; dy <= 1; dy++)
+                            {
+                                if (Math.Abs(dx) + Math.Abs(dy) != 1) continue;
+                                int nx = (i + dx + Grid.GridSize) % Grid.GridSize;
+                                int ny = (j + dy + Grid.GridSize) % Grid.GridSize;
+
+                                if (grid.Rabbits[nx, ny] == 0 && grid.Foxes[nx, ny] == 0)
+                                {
+                                    grid.Rabbits[nx, ny] = 1;
+                                    return;
+                                }
+                            }
+                        }
                     }
                 }
             }
